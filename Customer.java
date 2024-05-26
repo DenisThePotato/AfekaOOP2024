@@ -19,8 +19,7 @@ public class Customer extends User{
         currentOrder.getProducts().get(product.getName()).add(product);
     }
     public void currentOrderToHistory(){
-        for(Map.Entry<Seller, ArrayList<Product>> set : currentOrder.getProducts().entrySet()) {
-            for(currentOrder)
-        }
+        this.orderHistory.getPurchase().add(currentOrder);
+        this.currentOrder = new Order();
     }
 }

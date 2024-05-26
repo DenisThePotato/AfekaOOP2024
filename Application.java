@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Application {
@@ -61,21 +62,35 @@ public class Application {
                 System.out.println("Which product would you like to purchase? ");
                 String product = scanner.next();    //PRODUCT NAME
                 if (database.getSellers().get(seller).getProducts().containsKey(product)){
-                    database.getCustomers().get(customer).getCurrentOrder().getProducts().get(seller).add(product);
+                    database.getCustomers().get(customer).getCurrentOrder().getProducts().get(seller).add(product); //fix
+                } else {
+                    System.out.println("This product is not currently sold by the seller.");
                 }
+            } else {
+                System.out.println("The seller isn't registered in the system.");
             }
         } else {
             System.out.println("The customer isn't registered in the system.");
         }
     }
     public static void option5(Database database, Scanner scanner){
-
+        System.out.print("Which customer is paying? ");
+        String customer = scanner.next();
+        if(database.getCustomers().containsKey(customer)){
+            database.getCustomers().get(customer).currentOrderToHistory();
+        } else {
+            System.out.println("The customer isn't registered in the system.");
+        }
     }
     public static void option6(Database database, Scanner scanner){
-
+        for (Map.Entry<String, Customer> entry : database.getCustomers().entrySet()) {
+            System.out.println(entry.getKey());
+        }
     }
     public static void option7(Database database, Scanner scanner){
-
+        for (Map.Entry<String, Seller> entry : database.getSellers().entrySet()) {
+            System.out.println(entry.getKey());
+        }
     }
     public static void main(String[] args) {
         //maybe add a regex later for the scanner (both for the int input and string)
