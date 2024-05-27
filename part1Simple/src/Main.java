@@ -1,5 +1,5 @@
-//Denis Mogilevsky, 207270521 (Keren Kalif, Guy Isakov).
-//Shay Krinizky, 212876114 ().
+//Denis Mogilevsky, 207270521 (Lector: Keren, Practice: Guy).
+//Shay Krinizky, 212876114 (Lector: Iris, Practice: Guy).
 import java.util.HashSet;
 import java.util.Scanner;
 
