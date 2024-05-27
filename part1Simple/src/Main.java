@@ -20,6 +20,8 @@ public class Main {
         String newSeller = scanner.next();
         if(sellers.contains(newSeller)){
             System.out.println("The seller is already registered.");
+        } else {
+            sellers.add(newSeller);
         }
     }
     public static void option2(Scanner scanner){
@@ -27,6 +29,8 @@ public class Main {
         String newCustomer = scanner.next();
         if(customers.contains(newCustomer)){
             System.out.println("The customer is already registered.");
+        } else {
+            customers.add(newCustomer);
         }
     }
     public static void option3(Scanner scanner){
@@ -36,7 +40,7 @@ public class Main {
             System.out.println("Item name: ");
             String itemName = scanner.next();
             System.out.println("Item price: ");
-            double itemPrice = scanner.nextInt();
+            double itemPrice = scanner.nextDouble();
             System.out.println("Item category: ");
             String itemCategory = scanner.next();
         } else {
@@ -68,12 +72,12 @@ public class Main {
             System.out.println("The customer isn't registered in the system.");
         }
     }
-    public static void option6(Scanner scanner){
+    public static void option6(){
         for(String seller: sellers){
             System.out.println(seller);
         }
     }
-    public static void option7(Scanner scanner){
+    public static void option7(){
         for(String customer: customers){
             System.out.println(customer);
         }
@@ -82,25 +86,37 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         while(true){
             printMenu();
-            switch(scanner.nextInt()){
+            int option = scanner.nextInt();
+            scanner.nextLine();
+            switch(option){
                 case 0:
                     System.out.println("Thank you for using our services,");
                     System.out.println("Have a pleasant day.");
-                    break;
+                    return;
                 case 1:
                     option1(scanner);
+                    break;
                 case 2:
                     option2(scanner);
+                    break;
                 case 3:
                     option3(scanner);
+                    break;
                 case 4:
                     option4(scanner);
+                    break;
                 case 5:
                     option5(scanner);
+                    break;
                 case 6:
-                    option6(scanner);
+                    option6();
+                    break;
                 case 7:
-                    option7(scanner);
+                    option7();
+                    break;
+                default:
+                    System.out.println("Invalid option chosen.");
+                    break;
             }
         }
     }
