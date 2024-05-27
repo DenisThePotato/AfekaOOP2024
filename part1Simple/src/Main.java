@@ -1,3 +1,5 @@
+//Denis Mogilevsky, 207270521 (Keren Kalif, Guy Isakov).
+//Shay Krinizky, 212876114 ().
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -15,6 +17,11 @@ public class Main {
         System.out.println("[7]: Show seller details.");
         System.out.println("-----------------------------------");
     }
+
+    /**
+     * Adds a seller to the seller HashSet.
+     * @param scanner for the user input.
+     */
     public static void option1(Scanner scanner){
         System.out.print("Seller's name? ");
         String newSeller = scanner.next();
@@ -24,6 +31,11 @@ public class Main {
             sellers.add(newSeller);
         }
     }
+
+    /**
+     * Adds a customer to the customer HashSet.
+     * @param scanner for the user input.
+     */
     public static void option2(Scanner scanner){
         System.out.print("Customer's name? ");
         String newCustomer = scanner.next();
@@ -33,25 +45,35 @@ public class Main {
             customers.add(newCustomer);
         }
     }
+
+    /**
+     * Adds an item to a seller's item collection.
+     * @param scanner for the user input.
+     */
     public static void option3(Scanner scanner){
         System.out.print("Seller's name? ");
         String newSeller = scanner.next();
         if(sellers.contains(newSeller)){
-            System.out.println("Item name: ");
+            System.out.print("Item name: ");
             String itemName = scanner.next();
-            System.out.println("Item price: ");
+            System.out.print("Item price: ");
             double itemPrice = scanner.nextDouble();
-            System.out.println("Item category: ");
+            System.out.print("Item category: ");
             String itemCategory = scanner.next();
         } else {
             System.out.println("The seller isn't registered in the system.");
         }
     }
+
+    /**
+     * Adds an item to a customer's cart.
+     * @param scanner for the user input.
+     */
     public static void option4(Scanner scanner){
         System.out.print("Customer's name? ");
         String customerName = scanner.next();
         if(customers.contains(customerName)){
-            System.out.println("What seller is the purchase from?");
+            System.out.print("What seller is the purchase from?");
             String sellerName = scanner.next();
             if(sellers.contains(sellerName)){
                 System.out.println("purchase by " + customerName + " from " + sellerName);
@@ -62,8 +84,13 @@ public class Main {
             System.out.println("The customer isn't registered in the system.");
         }
     }
+
+    /**
+     * Finalizes a purchase for a customer.
+     * @param scanner for the user input.
+     */
     public static void option5(Scanner scanner){
-        System.out.println("Customer name? ");
+        System.out.print("Customer name? ");
         String customerName = scanner.next();
         if(customers.contains(customerName)){
             //purchase logic
@@ -72,16 +99,29 @@ public class Main {
             System.out.println("The customer isn't registered in the system.");
         }
     }
+
+    /**
+     * Prints all seller names.
+     */
     public static void option6(){
-        for(String seller: sellers){
-            System.out.println(seller);
-        }
-    }
-    public static void option7(){
         for(String customer: customers){
             System.out.println(customer);
         }
     }
+
+    /**
+     * Prints all customer names.
+     */
+    public static void option7(){
+        for(String seller: sellers){
+            System.out.println(seller);
+        }
+    }
+
+    /**
+     * acts as a menu for a user. Each choice is realised in a relevant method.
+     * @param args irrelevant to the program. Will be empty.
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         while(true){
