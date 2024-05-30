@@ -1,11 +1,54 @@
 //Denis Mogilevsky, 207270521 (Lector: Keren, Practice: Guy).
 //Shay Krinizky, 212876114 (Lector: Iris, Practice: Guy).
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
-    static HashSet<String> sellers = new HashSet<>();
-    static HashSet<String> customers = new HashSet<>();
+    static String[] sellers = new String[2];
+    static int sellersCurrentIndex = 0;
+    static String[] customers = new String[2];
+    static int customersCurrentIndex = 0;
+
+    /**
+     * Checks if an array is full.
+     * @param arr array to check the size of.
+     * @param index current index of array being used.
+     * @return true if the array is full, and false otherwise.
+     */
+    public static boolean bIsArrayFull(String[] arr, int index){
+        if(index == (arr.length - 1)){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * doubles an array's size.
+     * @param arr array to increase the size of.
+     * @return the array with increased size.
+     */
+    public static String[] doubleArraySize(String[] arr){
+        String[] newArr = new String[arr.length * 2];
+        System.arraycopy(arr, 0, newArr, 0, arr.length);
+        return newArr;
+    }
+
+    /**
+     * Checks if an element is in an array.
+     * @param arr array in which the element is searched for.
+     * @param check string which is searched for.
+     * @return the index of the element in the array, -1 if not found.
+     */
+    public static int elementIndex(String[] arr, String check){
+        for(int i = 0; i < arr.length; i++){
+            if(Objects.equals(arr[i], check)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public static void printMenu(){
         System.out.println("-----------------------------------");
         System.out.println("[1]: Add a seller.");
@@ -25,10 +68,12 @@ public class Main {
     public static void option1(Scanner scanner){
         System.out.print("Seller's name? ");
         String newSeller = scanner.next();
-        if(sellers.contains(newSeller)){
+        if(elementIndex(sellers, newSeller) != -1){
             System.out.println("The seller is already registered.");
         } else {
-            sellers.add(newSeller);
+            sellers[sellersCurrentIndex] = newSeller;
+            sellersCurrentIndex++;
+            System.out.println("The seller " + newSeller + " has been registered.");
         }
     }
 
@@ -39,10 +84,12 @@ public class Main {
     public static void option2(Scanner scanner){
         System.out.print("Customer's name? ");
         String newCustomer = scanner.next();
-        if(customers.contains(newCustomer)){
+        if(elementIndex(customers, newCustomer) != -1){
             System.out.println("The customer is already registered.");
         } else {
-            customers.add(newCustomer);
+            customers[customersCurrentIndex] = newCustomer;
+            customersCurrentIndex++;
+            System.out.println("The customer " + newCustomer + " has been registered.");
         }
     }
 
@@ -53,13 +100,15 @@ public class Main {
     public static void option3(Scanner scanner){
         System.out.print("Seller's name? ");
         String newSeller = scanner.next();
-        if(sellers.contains(newSeller)){
+        if(elementIndex(sellers, newSeller) != -1){
             System.out.print("Item name: ");
             String itemName = scanner.next();
             System.out.print("Item price: ");
             double itemPrice = scanner.nextDouble();
             System.out.print("Item category: ");
             String itemCategory = scanner.next();
+            System.out.println("The item " + itemName + " has been added to the " + itemCategory + " category.");
+            System.out.println("It's price is " + itemPrice + "$.");
         } else {
             System.out.println("The seller isn't registered in the system.");
         }
@@ -72,11 +121,11 @@ public class Main {
     public static void option4(Scanner scanner){
         System.out.print("Customer's name? ");
         String customerName = scanner.next();
-        if(customers.contains(customerName)){
-            System.out.print("What seller is the purchase from?");
+        if(elementIndex(customers, customerName) != -1){
+            System.out.print("What seller is the purchase from? ");
             String sellerName = scanner.next();
-            if(sellers.contains(sellerName)){
-                System.out.println("purchase by " + customerName + " from " + sellerName);
+            if(elementIndex(sellers, sellerName) != -1){
+                System.out.println(sellerName + "'s product has been added to your cart, " + customerName + ".");
             } else {
                 System.out.println("The seller isn't registered in the system.");
             }
@@ -92,9 +141,8 @@ public class Main {
     public static void option5(Scanner scanner){
         System.out.print("Customer name? ");
         String customerName = scanner.next();
-        if(customers.contains(customerName)){
-            //purchase logic
-            System.out.println("Thank you for the purchase.");
+        if(elementIndex(customers, customerName) != -1){
+            System.out.println("Thank you for the purchase, " + customerName + ".");
         } else {
             System.out.println("The customer isn't registered in the system.");
         }
@@ -105,6 +153,9 @@ public class Main {
      */
     public static void option6(){
         for(String customer: customers){
+            if(customer == null){
+                return;
+            }
             System.out.println(customer);
         }
     }
@@ -114,6 +165,9 @@ public class Main {
      */
     public static void option7(){
         for(String seller: sellers){
+            if(seller == null){
+                return;
+            }
             System.out.println(seller);
         }
     }
@@ -134,9 +188,15 @@ public class Main {
                     System.out.println("Have a pleasant day.");
                     return;
                 case 1:
+                    if(bIsArrayFull(sellers, sellersCurrentIndex)){
+                        sellers = doubleArraySize(sellers);
+                    }
                     option1(scanner);
                     break;
                 case 2:
+                    if(bIsArrayFull(customers, customersCurrentIndex)){
+                        customers = doubleArraySize(customers);
+                    }
                     option2(scanner);
                     break;
                 case 3:
