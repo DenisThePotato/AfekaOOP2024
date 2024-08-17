@@ -1,5 +1,3 @@
-//Denis Mogilevsky, 207270521 (Lector: Keren, Practice: Guy).
-//Shay Krinizky, 212876114 (Lector: Iris, Practice: Guy).
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Scanner;
