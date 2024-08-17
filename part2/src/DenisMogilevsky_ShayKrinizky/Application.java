@@ -1,6 +1,4 @@
 package DenisMogilevsky_ShayKrinizky;
-//Denis Mogilevsky, 207270521 (Lector: Keren, Practice: Guy).
-//Shay Krinizky, 212876114 (Lector: Iris, Practice: Guy).
 import java.util.Scanner;
 
 public class Application {
